@@ -1,10 +1,16 @@
 // ITERATION 1
-
 function updateSubtotal(product) {
   console.log('Calculating subtotal, yey!');
-
-  //... your code goes here
+  const $price = product.querySelector('.price span');
+  const $quantityValeu = product.querySelector ('.quantity input')
+  const resultSubtotal = Number($price.innerText) * ($quantityValeu.valueAsNumber);
+  const $subtotal = product.querySelector('.subtotal span') // add this value to subtotal
+  $subtotal.innerText = resultSubtotal;
+  return resultSubtotal;  
+ 
 }
+
+
 
 function calculateAll() {
   // code in the following two lines is added just for testing purposes.
@@ -14,18 +20,37 @@ function calculateAll() {
   // end of test
 
   // ITERATION 2
-  //... your code goes here
+  let auxTotal = 0;
+  const $total = document.querySelector('#total-value span')
+  const allProducts = document.querySelectorAll (' .product')
 
+  
   // ITERATION 3
-  //... your code goes here
+  for(let price of allProducts){
+    auxTotal += updateSubtotal(price);
+  }
+
+  $total.innerText = auxTotal; 
 }
 
-// ITERATION 4
+// ITERATION 4 // Remove when click any place of the line,
+  // Should be just the button
 
 function removeProduct(event) {
-  const target = event.currentTarget;
-  console.log('The target in remove is:', target);
+  const $target = event.currentTarget;
+  console.log('The target in remove is:', $target);
   //... your code goes here
+ 
+  
+  const $thisButton = $target.parentNode.parentNode // 
+  const $parentButton = $target.parentNode.parentNode.parentNode; 
+  
+  
+
+  $parentButton.removeChild($thisButton); // Remove when click any place of the line,
+  // Should be just the button
+  
+  
 }
 
 // ITERATION 5
@@ -37,6 +62,12 @@ function createProduct() {
 window.addEventListener('load', () => {
   const calculatePricesBtn = document.getElementById('calculate');
   calculatePricesBtn.addEventListener('click', calculateAll);
-
   //... your code goes here
+  const $allRemoveBtn = document.querySelectorAll('.btn-remove');
+  for(let{} of $allRemoveBtn){     
+    addEventListener('click', removeProduct); 
+  }
+  
+  
+  
 });
